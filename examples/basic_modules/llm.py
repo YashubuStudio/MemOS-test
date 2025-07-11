@@ -10,7 +10,7 @@ config = LLMConfigFactory.model_validate(
     {
         "backend": "ollama",
         "config": {
-            "model_name_or_path": "qwen3:0.6b",
+            "model_name_or_path": "gemma3:latest",
             "temperature": 0.8,
             "max_tokens": 1024,
             "top_p": 0.9,
@@ -30,7 +30,7 @@ print("==" * 20)
 # Scenario 2: Using Pydantic model directly
 
 config = OllamaLLMConfig(
-    model_name_or_path="qwen3:0.6b",
+    model_name_or_path="gemma3:latest",
     temperature=0.8,
     max_tokens=1024,
     top_p=0.9,
