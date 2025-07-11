@@ -163,6 +163,9 @@ For more detailed examples, please check out the [`examples`](./examples) direct
 pip install MemoryOS
 ```
 
+If this is a new environment, install [Ollama](#ollama-support) as well so that
+the examples can run using a local Ollama server.
+
 ### Development Install
 
 To contribute to MemOS, clone the repository and install it in editable mode:
@@ -180,6 +183,21 @@ make install
 To use MemOS with [Ollama](https://ollama.com/), first install the Ollama CLI:
 ```bash
 curl -fsSL https://ollama.com/install.sh | sh
+```
+
+Once installed, start the Ollama server and pull a model (the examples use
+`qwen3:0.6b` by default):
+
+```bash
+ollama serve &                 # start the local Ollama server
+ollama pull qwen3:0.6b         # download a model for generation
+```
+
+With the server running at `http://localhost:11434` you can try an example that
+uses the Ollama backend:
+
+```bash
+python examples/basic_modules/llm.py
 ```
 
 #### Transformers Support
