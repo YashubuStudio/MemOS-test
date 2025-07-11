@@ -21,7 +21,7 @@ class OllamaLLM(BaseLLM):
 
         # Default model if not specified
         if not self.config.model_name_or_path:
-            self.config.model_name_or_path = "llama3.1:latest"
+            self.config.model_name_or_path = "gemma3:latest"
 
         # Initialize ollama client
         self.client = Client(host=self.api_base)

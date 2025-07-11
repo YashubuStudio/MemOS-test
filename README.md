@@ -186,11 +186,11 @@ curl -fsSL https://ollama.com/install.sh | sh
 ```
 
 Once installed, start the Ollama server and pull a model (the examples use
-`qwen3:0.6b` by default):
+`gemma3:latest` by default):
 
 ```bash
 ollama serve &                 # start the local Ollama server
-ollama pull qwen3:0.6b         # download a model for generation
+ollama pull gemma3:latest      # download a model for generation
 ```
 
 With the server running at `http://localhost:11434` you can try an example that

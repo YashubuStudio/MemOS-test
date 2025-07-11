@@ -8,7 +8,7 @@ config = MemoryConfigFactory(
         "extractor_llm": {
             "backend": "ollama",
             "config": {
-                "model_name_or_path": "qwen3:0.6b",
+                "model_name_or_path": "gemma3:latest",
                 "temperature": 0.0,
                 "remove_think_prefix": True,
                 "max_tokens": 8192,

@@ -53,11 +53,11 @@ Ollama CLIをインストールします。
 curl -fsSL https://ollama.com/install.sh | sh
 ```
 
-インストール後、Ollamaサーバーを起動し、モデルを取得します (サンプルでは`qwen3:0.6b`を使用)。
+インストール後、Ollamaサーバーを起動し、モデルを取得します (サンプルでは`gemma3:latest`を使用)。
 
 ```bash
 ollama serve &                 # ローカルOllamaサーバーを起動
-ollama pull qwen3:0.6b         # 推論用モデルをダウンロード
+ollama pull gemma3:latest      # 推論用モデルをダウンロード
 ```
 
 サーバーが `http://localhost:11434` で起動していれば、次のサンプルを試せます。
