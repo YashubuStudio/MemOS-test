@@ -26,12 +26,19 @@ def _load_real_torch():
     stub_dir = os.path.dirname(__file__)
     if stub_dir in sys.path:
         sys.path.remove(stub_dir)
+
+    # Remove the currently loading stub from ``sys.modules`` so that a
+    # subsequent import attempt does not simply return this module again.
+    stub_module = sys.modules.pop(__name__, None)
     try:
         return importlib.import_module("torch")
     except Exception:
         return None
     finally:
-        # Restore the stub path for any subsequent imports
+        # Restore the stub path and ``sys.modules`` entry for any subsequent
+        # imports of this stub.
+        if stub_module is not None:
+            sys.modules[__name__] = stub_module
         if stub_dir not in sys.path:
             sys.path.insert(0, stub_dir)
 
