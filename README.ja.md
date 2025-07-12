@@ -78,6 +78,8 @@ python examples/basic_modules/llm.py
 
 公開リポジトリからモデルやデータセットを取得するだけであれば `huggingface-cli login` は必須ではありません。プライベートリポジトリを利用する場合や高速にダウンロードしたい場合は、アクセストークンを取得して `huggingface-cli login` を実行してください。
 
+完全にオフラインで実行したい場合は、環境変数 `HF_HUB_OFFLINE=1` を設定すると、Hugging Face Hub へのアクセスを行いません。Linux/Mac では `export HF_HUB_OFFLINE=1`、Windows では `set HF_HUB_OFFLINE=1` を実行してからサーバーを起動してください。
+
 ## 💬 コミュニティとサポート
 
 - **GitHub Issues**: <https://github.com/MemTensor/MemOS/issues>
