@@ -17,6 +17,8 @@ MemOS の初期設定を行います。
 curl -X POST "http://localhost:8000/configure" -H "Content-Type: application/json" -d "{\"user_id\":\"root\",\"chat_model\":{\"backend\":\"ollama\",\"config\":{\"model_name_or_path\":\"gemma3\",\"api_base\":\"http://localhost:11434\"}},\"mem_reader\":{\"backend\":\"simple_struct\",\"config\":{\"llm\":{\"backend\":\"ollama\",\"config\":{\"model_name_or_path\":\"gemma3\",\"api_base\":\"http://localhost:11434\"}},\"embedder\":{\"backend\":\"ollama\",\"config\":{\"model_name_or_path\":\"nomic-embed-text\"}},\"chunker\":{\"backend\":\"sentence\",\"config\":{}}}}}"} 
 ```
 
+cmd上ではダブルクォーテーションを`\"`でエスケープします。末尾に余計な`"`が入らないよう注意してください。
+
 ## User operations
 ユーザー操作に関する例です。
 
