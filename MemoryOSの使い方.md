@@ -1,0 +1,69 @@
+# MemOSの使い方
+
+このドキュメントでは、`pip install MemoryOS` でインストールした MemOS を使う基本的な手順をまとめます。
+
+## インストール
+
+1. **MemOS のインストール**
+   ```bash
+   pip install MemoryOS
+   ```
+2. **(任意) Ollama の準備**
+   ローカルで LLM を実行する場合は [Ollama](https://ollama.com/) をインストールします。
+   ```bash
+   curl -fsSL https://ollama.com/install.sh | sh
+   ollama serve &                 # サーバー起動
+   ollama pull gemma3:latest      # モデル取得
+   ```
+
+## 基本的な使い方
+
+### MemCube を利用する例
+```python
+from memos.mem_cube.general import GeneralMemCube
+
+# ディレクトリから MemCube を初期化
+mem_cube = GeneralMemCube.init_from_dir("examples/data/mem_cube_2")
+
+print("--- Textual Memories ---")
+for item in mem_cube.text_mem.get_all():
+    print(item)
+
+print("\n--- Activation Memories ---")
+for item in mem_cube.act_mem.get_all():
+    print(item)
+
+# MemCube を別の場所へ保存
+mem_cube.dump("tmp/mem_cube")
+```
+
+### MOS を利用する例
+```python
+from memos.configs.mem_os import MOSConfig
+from memos.mem_os.main import MOS
+
+mos_config = MOSConfig.from_json_file("examples/data/config/simple_memos_config.json")
+memory = MOS(mos_config)
+
+user_id = "b41a34d5-5cae-4b46-8c49-d03794d206f5"
+memory.create_user(user_id=user_id)
+
+memory.register_mem_cube("examples/data/mem_cube_2", user_id=user_id)
+
+memory.add(
+    messages=[
+        {"role": "user", "content": "I like playing football."},
+        {"role": "assistant", "content": "I like playing football too."},
+    ],
+    user_id=user_id,
+)
+
+retrieved_memories = memory.search(query="What do you like?", user_id=user_id)
+print(f"text_memories: {retrieved_memories['text_mem']}")
+```
+
+### 付属サンプルの実行
+Ollama サーバーが起動している状態で次のサンプルを実行できます。
+```bash
+python examples/basic_modules/llm.py
+```
