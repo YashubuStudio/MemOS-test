@@ -380,11 +380,20 @@ class MOSCore:
             mem_cube_id = mem_cube_name_or_path
 
         if mem_cube_id in self.mem_cubes:
-            logger.info(f"MemCube with ID {mem_cube_id} already in MOS, skip install.")
+            logger.info(
+                f"MemCube with ID {mem_cube_id} already in MOS, skip install."
+            )
         else:
-            if os.path.exists(mem_cube_name_or_path):
-                self.mem_cubes[mem_cube_id] = GeneralMemCube.init_from_dir(mem_cube_name_or_path)
+            path_obj = Path(mem_cube_name_or_path)
+            if path_obj.exists():
+                self.mem_cubes[mem_cube_id] = GeneralMemCube.init_from_dir(
+                    mem_cube_name_or_path
+                )
             else:
+                if path_obj.is_absolute() or path_obj.drive:
+                    raise FileNotFoundError(
+                        f"Local MemCube path {mem_cube_name_or_path} does not exist."
+                    )
                 logger.warning(
                     f"MemCube {mem_cube_name_or_path} does not exist, try to init from remote repo."
                 )

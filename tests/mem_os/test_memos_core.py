@@ -285,7 +285,7 @@ class TestMOSMemoryOperations:
         mock_user_manager.get_cube.return_value = None  # Cube doesn't exist
 
         with patch("memos.mem_os.core.GeneralMemCube") as mock_general_cube:
-            mock_general_cube.init_from_dir.return_value = mock_mem_cube
+        mock_general_cube.init_from_dir.return_value = mock_mem_cube
 
             mos = MOSCore(MOSConfig(**mock_config))
 
@@ -294,6 +294,32 @@ class TestMOSMemoryOperations:
 
             assert "test_cube_1" in mos.mem_cubes
             mock_general_cube.init_from_dir.assert_called_once_with("test_cube_path")
+
+    @patch("memos.mem_os.core.UserManager")
+    @patch("memos.mem_os.core.MemReaderFactory")
+    @patch("memos.mem_os.core.LLMFactory")
+    def test_register_mem_cube_missing_local_path(
+        self,
+        mock_llm_factory,
+        mock_reader_factory,
+        mock_user_manager_class,
+        mock_config,
+        mock_llm,
+        mock_mem_reader,
+        mock_user_manager,
+        mock_mem_cube,
+    ):
+        """Test registering a MemCube with an invalid local path."""
+        mock_llm_factory.from_config.return_value = mock_llm
+        mock_reader_factory.from_config.return_value = mock_mem_reader
+        mock_user_manager_class.return_value = mock_user_manager
+        mock_user_manager.get_cube.return_value = None
+
+        mos = MOSCore(MOSConfig(**mock_config))
+
+        with patch("pathlib.Path.exists", return_value=False):
+            with pytest.raises(FileNotFoundError):
+                mos.register_mem_cube("/absent/path/to/cube")
 
     @patch("memos.mem_os.core.UserManager")
     @patch("memos.mem_os.core.MemReaderFactory")
