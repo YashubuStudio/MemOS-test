@@ -204,6 +204,10 @@ python examples/basic_modules/llm.py
 
 To use functionalities based on the `transformers` library, ensure you have [PyTorch](https://pytorch.org/get-started/locally/) installed (CUDA version recommended for GPU acceleration).
 
+#### Hugging Face Hub
+
+You don't need to run `huggingface-cli login` unless you want to access private repositories or speed up downloads. For completely offline usage you can set the environment variable `HF_HUB_OFFLINE=1` before starting the server. On Linux/Mac use `export HF_HUB_OFFLINE=1`, on Windows use `set HF_HUB_OFFLINE=1`.
+
 ## 💬 Community & Support
 
 Join our community to ask questions, share your projects, and connect with other developers.

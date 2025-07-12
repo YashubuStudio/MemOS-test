@@ -23,6 +23,10 @@ MemOSは複数の推論タスクにおいてベースラインを大きく上回
 - **📦 Modular Memory Architecture (MemCube)**: 複数のメモリタイプを簡単に統合・管理できる柔軟なアーキテクチャ。
 - **💾 多彩なメモリタイプ**: テキストメモリ、アクティベーションメモリなど。
 
+### MemCubeとは？
+
+複数のメモリ(テキスト、アクティベーション、パラメトリックなど)をまとめて保存・管理するコンテナです。各ユーザーのMemCubeはローカルディレクトリやHugging Faceのリポジトリとして配置でき、ロードや共有が容易に行えます。
+
 ## 📦 インストール
 
 > **注意**: MemOSはLinux、Windows、macOSで動作しますが、macOSでは依存関係の解決が難しい場合があります。
@@ -69,6 +73,12 @@ python examples/basic_modules/llm.py
 #### Transformersサポート
 
 `transformers` ライブラリを使う場合は [PyTorch](https://pytorch.org/get-started/locally/) をインストールしてください (GPU利用にはCUDA版推奨)。
+
+#### Hugging Face Hub
+
+公開リポジトリからモデルやデータセットを取得するだけであれば `huggingface-cli login` は必須ではありません。プライベートリポジトリを利用する場合や高速にダウンロードしたい場合は、アクセストークンを取得して `huggingface-cli login` を実行してください。
+
+完全にオフラインで実行したい場合は、環境変数 `HF_HUB_OFFLINE=1` を設定すると、Hugging Face Hub へのアクセスを行いません。Linux/Mac では `export HF_HUB_OFFLINE=1`、Windows では `set HF_HUB_OFFLINE=1` を実行してからサーバーを起動してください。
 
 ## 💬 コミュニティとサポート
 
