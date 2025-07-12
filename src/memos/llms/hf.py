@@ -37,10 +37,15 @@ class HFLLM(BaseLLM):
 
         # Initialize hf model
         self.model = AutoModelForCausalLM.from_pretrained(
-            self.config.model_name_or_path, torch_dtype="auto", device_map="auto"
+            self.config.model_name_or_path,
+            torch_dtype="auto",
+            device_map="auto",
+            local_files_only=True,
         )
         self.tokenizer = AutoTokenizer.from_pretrained(
-            self.config.model_name_or_path, use_fast=True
+            self.config.model_name_or_path,
+            use_fast=True,
+            local_files_only=True,
         )
 
         # Logits processors for sampling
